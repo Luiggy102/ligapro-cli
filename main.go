@@ -1,12 +1,7 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/Luiggy102/ligapro-cli/internal/requests"
-)
+import "github.com/Luiggy102/ligapro-cli/cmd"
 
 func main() {
-	fmt.Println(requests.GetTeams())
-	fmt.Println(requests.GetStats())
+	cmd.PrintTable()
 }

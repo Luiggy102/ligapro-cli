@@ -9,14 +9,14 @@ import (
 )
 
 // function that returns a slice of teams stats (position table)
-func GetStats() (stats []t.Stats) {
+func getStats() (stats []t.Stats) {
 
 	c := colly.NewCollector(
 		colly.AllowedDomains("www.espn.com", "espn.com", "espndeportes.espn.com"),
 	)
 
 	c.OnError(func(r *colly.Response, err error) {
-		fmt.Print("Error on teams stats request", r.StatusCode)
+		fmt.Println("Error on teams stats request", r.StatusCode)
 		u.Check(err)
 	})
 
