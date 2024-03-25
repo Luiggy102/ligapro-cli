@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"time"
 
 	r "github.com/Luiggy102/ligapro-cli/internal/requests"
 	lg "github.com/charmbracelet/lipgloss"
@@ -28,7 +29,14 @@ func PrintTable() {
 		Align(lg.Center).
 		Foreground(titleColor)
 
-	fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro Ecuador Etapa Actual 🇪🇨"))
+	switch time.Now().Month() {
+	case time.March, time.April, time.May, time.June, time.July:
+		fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro Ecuador 1ra Etapa 🇪🇨"))
+	case time.August, time.September, time.October, time.November, time.December:
+		fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro Ecuador 2da Etapa 🇪🇨"))
+	default:
+		fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro Ecuador 🇪🇨"))
+	}
 
 	// table
 	tableData := r.GetTable()
