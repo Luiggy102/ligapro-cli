@@ -1,24 +1,23 @@
 package requests
 
 import (
-	"fmt"
-
-	u "github.com/Luiggy102/ligapro-cli/internal/utils"
 	t "github.com/Luiggy102/ligapro-cli/types"
 	"github.com/gocolly/colly"
 )
 
 // function that returns a slice of teams stats (position table)
-func getStats() (stats []t.Stats) {
+func getStats() (stats []t.Stats, err error) {
 
 	c := colly.NewCollector(
 		colly.AllowedDomains("www.espn.com", "espn.com", "espndeportes.espn.com"),
 	)
 
-	c.OnError(func(r *colly.Response, err error) {
-		fmt.Println("Error on teams stats request", r.StatusCode)
-		u.Check(err)
+	c.OnError(func(r *colly.Response, errRequest error) {
+		errRequest = err
 	})
+	if err != nil {
+		return nil, err
+	}
 
 	// 1. get the raw numbers
 	nums := []string{}
@@ -425,5 +424,5 @@ func getStats() (stats []t.Stats) {
 	}
 	stats = append(stats, stat16)
 
-	return
+	return stats, nil
 }

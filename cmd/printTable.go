@@ -18,7 +18,22 @@ func PrintTable() {
 		footerColor  = lg.Color("255")
 		evenRowColor = lg.Color("248")
 		oddRowColor  = lg.Color("255")
+		errColor     = lg.Color("196")
 	)
+
+	// first check for an err
+	tableData, err := r.GetTable()
+	if err != nil {
+
+		errStyle := lg.NewStyle().
+			Width(80).
+			Align(lg.Left).
+			Foreground(errColor).
+			Italic(true)
+
+		panic(errStyle.Render("Error al obtener tabla, Intentalo de nuevo"))
+	}
+	// continue
 
 	// title
 	titleStyle := lg.NewStyle().
@@ -39,7 +54,6 @@ func PrintTable() {
 	}
 
 	// table
-	tableData := r.GetTable()
 	headers := []string{"POS", "EQUIPO", "PJ", "G", "E", "D", "GF", "GE", "GD", "PTS"}
 	data := [][]string{}
 	for _, v := range tableData {
@@ -59,7 +73,7 @@ func PrintTable() {
 	// table style
 	hStyle := lg.NewStyle().Foreground(lg.Color(mainColor))
 	evenRowStyle := lg.NewStyle().Foreground(evenRowColor)
-	oddRowStyle := lg.NewStyle().Foreground(oddRowColor)
+	oddRowStyle := lg.NewStyle()
 
 	t.
 		Width(80).

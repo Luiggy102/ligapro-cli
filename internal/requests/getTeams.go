@@ -1,24 +1,23 @@
 package requests
 
 import (
-	"fmt"
-
-	u "github.com/Luiggy102/ligapro-cli/internal/utils"
 	t "github.com/Luiggy102/ligapro-cli/types"
 	"github.com/gocolly/colly"
 )
 
 // function that returns a slice of teams (position table)
-func getTeams() (teams []t.Team) {
+func getTeams() (teams []t.Team, err error) {
 
 	c := colly.NewCollector(
 		colly.AllowedDomains("www.espn.com", "espn.com", "espndeportes.espn.com"),
 	)
 
-	c.OnError(func(r *colly.Response, err error) {
-		fmt.Println("Error on teams request", r.StatusCode)
-		u.Check(err)
+	c.OnError(func(r *colly.Response, errRequest error) {
+		errRequest = err
 	})
+	if err != nil {
+		return nil, err
+	}
 
 	c.OnHTML(".Table__TD", func(h *colly.HTMLElement) {
 
@@ -44,5 +43,5 @@ func getTeams() (teams []t.Team) {
 		continue
 	}
 
-	return rTeams
+	return rTeams, nil
 }

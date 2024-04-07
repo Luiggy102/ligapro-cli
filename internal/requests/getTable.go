@@ -4,9 +4,16 @@ import (
 	t "github.com/Luiggy102/ligapro-cli/types"
 )
 
-func GetTable() []t.Team {
-	var teams = getTeams()
-	var stats = getStats()
+func GetTable() ([]t.Team, error) {
+
+	var teams, errT = getTeams()
+	if errT != nil {
+		return nil, errT
+	}
+	var stats, errS = getStats()
+	if errS != nil {
+		return nil, errS
+	}
 
 	teams[0].Stats = stats[0]
 	teams[1].Stats = stats[1]
@@ -25,5 +32,5 @@ func GetTable() []t.Team {
 	teams[14].Stats = stats[14]
 	teams[15].Stats = stats[15]
 
-	return teams
+	return teams, nil
 }
