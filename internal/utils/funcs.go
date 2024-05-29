@@ -21,7 +21,7 @@ func PrintTitle(title string, width int) {
 
 func PrintVisitingMsg(url string) {
 	msgStyle := lipgloss.NewStyle().
-		Foreground(LightBlue).
+		Foreground(Skyblue).
 		Underline(true).
 		Italic(true)
 	fmt.Println("Visitando:", msgStyle.Render(url))

@@ -27,6 +27,7 @@ func Help() {
 	t.Row(flagStyle.Render("-tabla"), "Tabla de posiciones")
 	t.Row(flagStyle.Render("-resultados"), "Últimos resultados de la fecha")
 	t.Row(flagStyle.Render("-goleadores"), "Tabla de goleadores")
+	t.Row(flagStyle.Render("-siguientes"), "Próximos partidos")
 	t.Row(lipgloss.JoinHorizontal(lipgloss.Left, flagStyle.Render("-fecha"), argument.Render(" <número>")), "Partidos de dicha fecha")
 	fmt.Println(t)
 

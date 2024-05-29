@@ -1,20 +1,19 @@
 package cmd
 
 import (
-	"fmt"
 	"regexp"
+	"time"
 
 	"github.com/Luiggy102/ligapro-cli/internal/requests"
 	"github.com/Luiggy102/ligapro-cli/internal/utils"
 )
 
-func PrintResults() {
+func PrintNext() {
 	fixture := requests.GetFixture()
 	filas := [][]string{}
 	partidosAMostrar := 8
-	// impimir 8 últimos partidos
-	for i := len(fixture.Home) - 1; i >= 0; i-- {
-		found, err := regexp.MatchString("-", fixture.Result[i])
+	for i := 0; i < len(fixture.Result)-1; i++ {
+		found, err := regexp.MatchString(":", fixture.Result[i])
 		if err != nil {
 			utils.ErrMsg("Error al filtrar los datos para resultados.\nInténtalo de nuevo.")
 		}
@@ -22,17 +21,19 @@ func PrintResults() {
 			if partidosAMostrar <= 0 {
 				break
 			}
+			parsedTime, err := time.Parse("02/01 15:04", fixture.Result[i])
+			if err != nil {
+				utils.ErrMsg("Error al cambiar el tiempo")
+			}
+			diff := parsedTime.Add(time.Hour * -7)
 			filas = append(filas, []string{
-				fixture.Home[i],
-				fixture.Result[i],
-				fixture.Visit[i],
+				fixture.Home[i], diff.Format("02/Jan 15:04"), fixture.Visit[i],
 			})
 			partidosAMostrar--
 		}
 	}
-	// Imprimir
-	const width = 65
-	utils.PrintTitle(fmt.Sprintf("Últimos partidos jugados"), width)
+	const width = 80
+	utils.PrintTitle("Siguientes partidos LigaPro", width)
 	utils.PrintTable(width, nil, filas...)
 	utils.LastUpdate()
 }

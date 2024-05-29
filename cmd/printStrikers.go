@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/Luiggy102/ligapro-cli/internal/requests"
 	"github.com/Luiggy102/ligapro-cli/internal/utils"
@@ -18,7 +17,7 @@ func PrintStrikers() {
 	}
 	// Imprimir
 	const width = 65
-	utils.PrintTitle(fmt.Sprintf("Tabla de goleadores LigaPro %d", time.Now().Year()), width)
+	utils.PrintTitle(fmt.Sprintf("Tabla de goleadores"), width)
 	utils.PrintTable(width, []string{"Jugador", "Goles", "Equipo"}, filas...)
 	utils.LastUpdate()
 }

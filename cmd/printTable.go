@@ -25,11 +25,11 @@ func PrintTable() {
 	const width = 80
 	switch time.Now().Month() {
 	case 3, 4, 5, 6, 7:
-		utils.PrintTitle("Tabla De Posiciones LigaPro 1ra Etapa", width)
+		utils.PrintTitle("Tabla De Posiciones 1ra Etapa", width)
 	case 8, 9, 10, 11, 12:
-		utils.PrintTitle("Tabla De Posiciones LigaPro 2da Etapa", width)
+		utils.PrintTitle("Tabla De Posiciones 2da Etapa", width)
 	default:
-		utils.PrintTitle("Tabla De Posiciones LigaPro", width)
+		utils.PrintTitle("Tabla De Posiciones", width)
 	}
 	utils.PrintTable(width, headers, data...)
 	utils.LastUpdate()

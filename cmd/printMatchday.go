@@ -51,7 +51,7 @@ func PrintMatchday(matchday int) {
 	}
 	// imprimir
 	const width = 75
-	utils.PrintTitle(fmt.Sprintf("Partidos de la fecha %d LigaPro %d", matchday, time.Now().Year()), width)
+	utils.PrintTitle(fmt.Sprintf("Partidos de la fecha %d", matchday), width)
 	utils.PrintTable(width, nil, filas...)
 	utils.LastUpdate()
 }

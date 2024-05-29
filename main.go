@@ -10,6 +10,7 @@ import (
 func main() {
 	printTable := flag.Bool("tabla", false, "Muesta la tabla de posiciones actual")
 	printResults := flag.Bool("resultados", false, "Mostrar los últimos resultados")
+	printNext := flag.Bool("siguientes", false, "mostrar los próximos partidos")
 	printStrikers := flag.Bool("goleadores", false, "Mostrar tabla de goleadores")
 	printMatchday := flag.Int("fecha", 0, "Mostrar los partidos de dicha fecha")
 	flag.Usage = utils.Help
@@ -21,6 +22,9 @@ func main() {
 		return
 	case *printResults:
 		cmd.PrintResults()
+		return
+	case *printNext:
+		cmd.PrintNext()
 		return
 	case *printStrikers:
 		cmd.PrintStrikers()
