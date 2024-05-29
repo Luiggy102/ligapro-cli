@@ -1,75 +1,36 @@
 package cmd
 
 import (
-	"fmt"
-	"os"
+	"strconv"
 	"time"
 
-	r "github.com/Luiggy102/ligapro-cli/internal/requests"
+	"github.com/Luiggy102/ligapro-cli/internal/requests"
 	"github.com/Luiggy102/ligapro-cli/internal/utils"
-	lg "github.com/charmbracelet/lipgloss"
-	"github.com/charmbracelet/lipgloss/table"
 )
 
 func PrintTable() {
-
 	// lógica
-	tableData := r.GetTable()
+	d := requests.GetPositionsTable()
 	headers := []string{"POS", "EQUIPO", "PJ", "G", "E", "D", "GF", "GE", "GD", "PTS"}
 	data := [][]string{}
-	for _, v := range tableData {
+	for i := 0; i < len(d.Names); i++ {
 		data = append(data, []string{
-			v.Position, v.Name, v.Stats.GamesPlayed, v.Stats.Wins, v.Stats.Draws, v.Stats.Loses,
-			v.Stats.GoalsFor, v.Stats.GoalsAgainst, v.Stats.GoalDifference, v.Stats.Points,
+			strconv.Itoa(i + 1), d.Names[i],
+			d.GamesPlayed[i], d.Wins[i], d.Draws[i], d.Loses[i],
+			d.GoalsFor[i], d.GoalsAgainst[i], d.GoalDifference[i],
+			d.Points[i],
 		})
 	}
-	t := table.New().
-		Headers(headers...).
-		Rows(data...)
-
-	// estílos
-	hStyle := lg.NewStyle().
-		Foreground(utils.Yellow)
-
-	evenRowStyle := lg.NewStyle().
-		Foreground(utils.DimWhite)
-
-	oddRowStyle := lg.NewStyle()
-
-	re := lg.NewRenderer(os.Stdout)
-
-	titleStyle := lg.NewStyle().
-		Width(80).
-		Bold(true).
-		Padding(1).
-		Align(lg.Center).
-		Foreground(utils.Yellow)
-
-	t.
-		Width(80).
-		Border(lg.RoundedBorder()).
-		StyleFunc(func(row, _ int) lg.Style {
-			switch {
-			case row == 0:
-				return hStyle
-			case row%2 == 0:
-				return evenRowStyle
-			default:
-				return oddRowStyle
-			}
-		}).
-		BorderStyle(re.NewStyle().Foreground(utils.Skyblue))
-
 	// imprimir
+	const width = 80
 	switch time.Now().Month() {
 	case 3, 4, 5, 6, 7:
-		fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro 1ra Etapa"))
+		utils.PrintTitle("Tabla De Posiciones LigaPro 1ra Etapa", width)
 	case 8, 9, 10, 11, 12:
-		fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro 2da Etapa"))
+		utils.PrintTitle("Tabla De Posiciones LigaPro 2da Etapa", width)
 	default:
-		fmt.Println(titleStyle.Render("Tabla De Posiciones LigaPro"))
+		utils.PrintTitle("Tabla De Posiciones LigaPro", width)
 	}
-	fmt.Println(t)
-	fmt.Printf("\nActualizado: %v", time.Now().Format("02/01/2006"))
-	fmt.Println("\nDatos Obtenidos de: espn.com")
+	utils.PrintTable(width, headers, data...)
+	utils.LastUpdate()
 }

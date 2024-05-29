@@ -2,7 +2,6 @@ package utils
 
 import "github.com/charmbracelet/lipgloss"
 
-// https://www.ditig.com/publications/256-colors-cheat-sheet
 const (
 	Yellow     = lipgloss.Color("230")
 	Skyblue    = lipgloss.Color("86")
@@ -14,4 +13,5 @@ const (
 	White      = lipgloss.Color("255")
 	DimWhite   = lipgloss.Color("248")
 	PurpleBlue = lipgloss.Color("#6C50FF")
+	LightBlue  = lipgloss.Color("5")
 )

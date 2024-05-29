@@ -29,6 +29,6 @@ func main() {
 		cmd.PrintMatchday(*printMatchday)
 		return
 	default:
-		utils.Title()
+		utils.Welcome()
 	}
 }

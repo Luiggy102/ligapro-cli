@@ -7,20 +7,15 @@ import (
 
 	"github.com/Luiggy102/ligapro-cli/internal/requests"
 	"github.com/Luiggy102/ligapro-cli/internal/utils"
-	"github.com/charmbracelet/lipgloss"
-	"github.com/charmbracelet/lipgloss/table"
 )
 
 func PrintMatchday(matchday int) {
 	if matchday < 1 || matchday > 30 {
-		utils.ErrMsg("Número de fecha incorrecto.\nColoque una fecha válida.")
+		utils.WarningMsg("Número de fecha incorrecto.\nColoque una fecha válida.")
 	}
 	fixture := requests.GetFixture()
 	fecha := 1
-
-	t := table.New()
 	filas := [][]string{}
-
 	// lógica
 	for i := 0; i < len(fixture.Result)-1; i++ {
 		if i%8 == 0 {
@@ -54,24 +49,9 @@ func PrintMatchday(matchday int) {
 
 		}
 	}
-	t.Rows(filas...)
-
-	// estilos
-	hStyle := lipgloss.NewStyle().
-		Width(75).
-		Align(lipgloss.Center).
-		Bold(true).
-		Foreground(lipgloss.Color("230")).
-		Padding(1, 0)
-	t.Width(75).
-		BorderStyle(lipgloss.NewStyle().
-			Foreground(lipgloss.Color("201")),
-		)
-
 	// imprimir
-	h := fmt.Sprintf("Partidos de la fecha %d LigaPro %d", matchday, time.Now().Year())
-	fmt.Println(hStyle.Render(h))
-	fmt.Println(t)
-	fmt.Printf("Actualizado: %v\n", time.Now().Format("02/01/2006"))
-	fmt.Println("Datos obtenidos de: marca.com")
+	const width = 75
+	utils.PrintTitle(fmt.Sprintf("Partidos de la fecha %d LigaPro %d", matchday, time.Now().Year()), width)
+	utils.PrintTable(width, nil, filas...)
+	utils.LastUpdate()
 }
