@@ -11,7 +11,7 @@ import (
 
 func PrintMatchday(matchday int) {
 	if matchday < 1 || matchday > 30 {
-		utils.WarningMsg("Número de fecha incorrecto.\nColoque una fecha válida.")
+		utils.WarningMsg("Coloque una fecha válida.\n[1-15] 1ra Etapa\n[16-30] 2da Etapa\n")
 	}
 	fixture := requests.GetFixture()
 	fecha := 1
@@ -35,7 +35,6 @@ func PrintMatchday(matchday int) {
 				}
 				// 7 horas de diferencia
 				diff := parsedTime.Add(time.Hour * -7)
-
 				// agregar filas
 				filas = append(filas, []string{
 					fixture.Home[i], diff.Format("02/Jan 15:04"), fixture.Visit[i],
@@ -46,7 +45,6 @@ func PrintMatchday(matchday int) {
 					fixture.Home[i], fixture.Result[i], fixture.Visit[i],
 				})
 			}
-
 		}
 	}
 	// imprimir
