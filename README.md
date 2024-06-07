@@ -1,5 +1,7 @@
 # ligapro-cli
 
+![alt text](./media/inicio.png) 
+
 ligapro-cli es un programa de terminal para estar al tanto de la serie A de Ecuador, también llamada LigaPro.  
 Los datos actualizados son obtenidos de:
   
@@ -20,19 +22,28 @@ Mostar las opciones con `-h`
 ```bash
 ligapro -h
 ```
+![alt text](./media/ayuda.png) 
+
 Mostar la tabla actual de posiciones con `-tabla`
 ```bash
 ligapro -tabla
 ```
+![alt text](./media/table.png) 
+
 Mostar los últimos resultados de la presente fecha con `-resultados`
 ```bash
 ligapro -resultados
 ```
+![alt text](./media/resultados.png) 
+
 Mostrar la tabla actual de goleadores con `-goleadores`
 ```bash
 ligapro -goleadores
 ```
+![alt text](./media/goleadores.png) 
+
 Buscar los partidos según su fecha con `-fecha <número-del-partido>`
 ```bash
-ligapro -fecha 13
+ligapro -fecha 15
 ```
+![alt text](./media/fecha.png) 
