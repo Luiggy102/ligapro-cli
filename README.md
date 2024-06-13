@@ -15,35 +15,35 @@ Los datos actualizados son obtenidos de:
 ## Instalación 
 Con go instalado, usar el comando:
 ```bash
-go install -o ligapro github.com/Luiggy102/ligapro-cli@latest
+go install github.com/Luiggy102/ligapro-cli@latest
 ```
 ### Uso
 Mostar las opciones con `-h`
 ```bash
-ligapro -h
+ligapro-cli -h
 ```
 ![alt text](./media/ayuda.png) 
 
-Mostar la tabla actual de posiciones con `-tabla`
+Mostar la tabla actual de posiciones con `-tabla`. También se puede buscar por años. Ej: `ligapro-cli -tabla -año 2023 -etapa 2`
 ```bash
-ligapro -tabla
+ligapro-cli -tabla
 ```
 ![alt text](./media/table.png) 
 
 Mostar los últimos resultados de la presente fecha con `-resultados`
 ```bash
-ligapro -resultados
+ligapro-cli -resultados
 ```
 ![alt text](./media/resultados.png) 
 
 Mostrar la tabla actual de goleadores con `-goleadores`
 ```bash
-ligapro -goleadores
+ligapro-cli -goleadores
 ```
 ![alt text](./media/goleadores.png) 
 
 Buscar los partidos según su fecha con `-fecha <número-del-partido>`
 ```bash
-ligapro -fecha 15
+ligapro-cli -fecha 15
 ```
 ![alt text](./media/fecha.png) 

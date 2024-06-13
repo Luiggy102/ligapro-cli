@@ -13,12 +13,14 @@ func main() {
 	printNext := flag.Bool("siguientes", false, "mostrar los próximos partidos")
 	printStrikers := flag.Bool("goleadores", false, "Mostrar tabla de goleadores")
 	printMatchday := flag.Int("fecha", 0, "Mostrar los partidos de dicha fecha")
+	year := flag.Int("año", 0, "año de la etapa a buscar")
+	season := flag.Int("etapa", 0, "etapa a buscar")
 	flag.Usage = utils.Help
 	flag.Parse()
 
 	switch {
 	case *printTable:
-		cmd.PrintTable()
+		cmd.PrintTable(*year, *season)
 		return
 	case *printResults:
 		cmd.PrintResults()

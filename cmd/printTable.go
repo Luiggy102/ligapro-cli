@@ -2,15 +2,14 @@ package cmd
 
 import (
 	"strconv"
-	"time"
 
 	"github.com/Luiggy102/ligapro-cli/internal/requests"
 	"github.com/Luiggy102/ligapro-cli/internal/utils"
 )
 
-func PrintTable() {
+func PrintTable(year int, season int) {
 	// lógica
-	d := requests.GetPositionsTable()
+	d := requests.GetPositionsTable(year, season)
 	headers := []string{"POS", "EQUIPO", "PJ", "G", "E", "D", "GF", "GE", "GD", "PTS"}
 	data := [][]string{}
 	for i := 0; i < len(d.Names); i++ {
@@ -23,14 +22,7 @@ func PrintTable() {
 	}
 	// imprimir
 	const width = 80
-	switch time.Now().Month() {
-	case 3, 4, 5:
-		utils.PrintTitle("Tabla De Posiciones 1ra Etapa", width)
-	case 6, 7, 8, 9, 10, 11:
-		utils.PrintTitle("Tabla De Posiciones 2da Etapa", width)
-	default:
-		utils.PrintTitle("Tabla De Posiciones", width)
-	}
+	utils.PrintTitle(d.TableTitle, width)
 	utils.PrintTable(width, headers, data...)
 	utils.LastUpdate()
 }

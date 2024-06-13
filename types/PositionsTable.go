@@ -1,6 +1,7 @@
 package types
 
 type PostionsTable struct {
+	TableTitle     string
 	Names          []string
 	GamesPlayed    []string
 	Wins           []string

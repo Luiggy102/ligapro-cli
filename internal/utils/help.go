@@ -10,7 +10,7 @@ import (
 
 func Help() {
 
-	t := table.New().Border(lipgloss.HiddenBorder()).Width(60)
+	t := table.New().Border(lipgloss.HiddenBorder()).Width(80)
 	ecu := lipgloss.NewStyle().SetString("Ecu").Background(DimYellow).Foreground(Black)
 	ad := lipgloss.NewStyle().SetString("ad").Background(Skyblue).Foreground(Black)
 	or := lipgloss.NewStyle().SetString("or").Background(Red)
@@ -25,6 +25,8 @@ func Help() {
 	fmt.Println(title.Render(strings.ToUpper("Uso")))
 	t.Row(flagStyle.Render("-h"), "Mostrar este mensaje de ayuda")
 	t.Row(flagStyle.Render("-tabla"), "Tabla de posiciones")
+	t.Row(lipgloss.JoinHorizontal(lipgloss.Left, flagStyle.Render("-tabla"),
+		argument.Render(" -año <número>"), argument.Render(" -etapa <número>")), "Buscar tabla según el año y etapa")
 	t.Row(flagStyle.Render("-resultados"), "Últimos resultados de la fecha")
 	t.Row(flagStyle.Render("-goleadores"), "Tabla de goleadores")
 	t.Row(flagStyle.Render("-siguientes"), "Próximos partidos")
